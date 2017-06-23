@@ -2,6 +2,7 @@
 
 > Vue 2.0 右键菜单组件，菜单内容可以随意自定义
 
+![Preview](https://github.com/binggg/vue-context-menu/blob/master/demo/assets/demo.jpeg?raw=true)
 
 ## 安装
 ```
@@ -40,7 +41,7 @@ export default {
 <script src="./node_modules/dist/vue-context-menu.js"></script>
 ```
 
-### 2. 模版语法
+### 2. 模版语法
 ```html
  <context-menu class="right-menu" 
     :target="contextMenuTarget" 
@@ -56,8 +57,8 @@ export default {
 
 | 参数                    | 说明  | 类型 | 可选值 | 默认值 |
 |-------------------------|-------|------|--------|--------|
-| target | 触发右键事件的元素  | Element | -      | -      |
-| show | 是否显示右键菜单  | Boolean | -      | false      |
+| target | 触发右键事件的元素  | Element | -      | -      |
+| show | 是否显示右键菜单  | Boolean | -      | false      |
 
 
 ## Events
@@ -69,7 +70,7 @@ export default {
 
 ## 注意
 
-如果target是某个兄弟元素，可以使用 `$refs`来访问，但是注意请在父组件mounted 之后获取。
+如果target是某个兄弟元素，可以使用 `$refs`来访问，但是注意请在父组件mounted 之后获取。
 
 参考 https://cn.vuejs.org/v2/guide/components.html#子组件索引
 
