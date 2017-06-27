@@ -1,0 +1,11 @@
+pages:
+  stage: deploy
+  tags:
+  - centos6.8
+  script:
+  - echo 'Nothing to do...'
+  artifacts:
+    paths:
+    - demo/dist
+  only:
+  - master
