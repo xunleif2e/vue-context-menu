@@ -6,6 +6,6 @@ pages:
   - echo 'Nothing to do...'
   artifacts:
     paths:
-    - demo/dist
+    - ./demo/dist
   only:
   - master
