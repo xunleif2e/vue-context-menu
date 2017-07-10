@@ -140,7 +140,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       triggerHideFn: function triggerHideFn() {},
       x: null,
       y: null,
-      style: {}
+      style: {},
+      binded: false
     };
   },
 
@@ -159,6 +160,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       } else {
         this.unbindHideEvents();
       }
+    },
+    target: function target(_target) {
+      this.bindEvents();
     }
   },
   methods: {
@@ -167,8 +171,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this = this;
 
       this.$nextTick(function () {
+        if (!_this.target || _this.binded) return;
         _this.triggerShowFn = _this.contextMenuHandler.bind(_this);
         _this.target.addEventListener('contextmenu', _this.triggerShowFn);
+        _this.binded = true;
       });
     },
 

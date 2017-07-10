@@ -16,7 +16,8 @@ export default {
       triggerHideFn: () => {},
       x: null,
       y: null,
-      style: {}
+      style: {},
+      binded: false
     }
   },
   props: {
@@ -33,14 +34,19 @@ export default {
       } else {
         this.unbindHideEvents()
       }
+    },
+    target (target) {
+      this.bindEvents()
     }
   },
   methods: {
     // 初始化事件
     bindEvents () {
       this.$nextTick(() => {
+        if (!this.target || this.binded) return 
         this.triggerShowFn = this.contextMenuHandler.bind(this)
         this.target.addEventListener('contextmenu', this.triggerShowFn)
+        this.binded = true
       })
     },
 

@@ -14,9 +14,9 @@
   },
   "unpkg": "dist/vue-context-menu.js",
   "keywords": [
-     "vue.js",
-     "vue-plugin",
-     "vue-component"
+    "vue.js",
+    "vue-plugin",
+    "vue-component"
   ],
   "author": "赵兵",
   "license": "MIT",
