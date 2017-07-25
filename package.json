@@ -10,7 +10,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git@github.com:binggg/vue-context-menu.git"
+    "url": "git@github.com:xunleif2e/vue-context-menu.git"
   },
   "unpkg": "dist/vue-context-menu.js",
   "keywords": [

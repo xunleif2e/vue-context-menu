@@ -11,7 +11,7 @@ npm install @xunlei/vue-context-menu
 
 ## 在线Demo
 
-https://binggg.github.io/vue-context-menu/demo/dist
+https://xunleif2e.github.io/vue-context-menu/demo/dist
 
 ## 使用
 
