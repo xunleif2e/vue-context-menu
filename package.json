@@ -1,7 +1,7 @@
 {
   "name": "@xunlei/vue-context-menu",
   "description": "Vue 2.0 右键菜单组件，菜单内容可以随意自定义",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": false,
   "main": "dist/vue-context-menu.js",
   "files": [
