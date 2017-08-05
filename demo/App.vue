@@ -2,7 +2,6 @@
   <div id="app">
     <img ref="logo"src="./assets/logo.png">
     <context-menu class="right-menu" 
-      :target="contextMenuTarget" 
       :show="contextMenuVisible" 
       @update:show="(show) => contextMenuVisible = show">
       <a href="javascript:;" @click="copyMsg">复制</a>
@@ -70,7 +69,6 @@ a {
   border: solid 1px rgba(0, 0, 0, .2);
   border-radius: 3px;
   z-index: 999;
-  display: none;
 }
 .right-menu a {
   width: 75px;
