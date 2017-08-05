@@ -93,7 +93,7 @@ var Component = __webpack_require__(2)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/Users/benzhao/Sites/@xunlei/vue-context-menu/src/VueContextMenu.vue"
+Component.options.__file = "/mnt/D/projects/vue-context-menu/src/VueContextMenu.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] VueContextMenu.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -138,10 +138,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       triggerShowFn: function triggerShowFn() {},
       triggerHideFn: function triggerHideFn() {},
-      x: null,
-      y: null,
       style: {},
-      binded: false
+      binded: false,
+      bindedTarget: {}
     };
   },
 
@@ -150,6 +149,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     show: Boolean
   },
   mounted: function mounted() {
+    this.bindedTarget = this.target instanceof HTMLBodyElement ? this.target : this.$parent.$el;
     this.bindEvents();
   },
 
@@ -162,6 +162,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
     },
     target: function target(_target) {
+      this.bindedTarget = this.target instanceof HTMLBodyElement ? this.target : this.$parent.$el;
       this.bindEvents();
     }
   },
@@ -171,9 +172,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this = this;
 
       this.$nextTick(function () {
-        if (!_this.target || _this.binded) return;
+        if (_this.binded) return;
         _this.triggerShowFn = _this.contextMenuHandler.bind(_this);
-        _this.target.addEventListener('contextmenu', _this.triggerShowFn);
+        _this.bindedTarget.addEventListener('contextmenu', _this.triggerShowFn);
         _this.binded = true;
       });
     },
@@ -181,8 +182,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     // 取消绑定事件
     unbindEvents: function unbindEvents() {
-      if (!this.target) return;
-      this.target.removeEventListener('contextmenu', this.triggerShowFn);
+      this.bindedTarget.removeEventListener('contextmenu', this.triggerShowFn);
     },
 
 
@@ -209,19 +209,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     // 右键事件事件处理
     contextMenuHandler: function contextMenuHandler(e) {
-      this.x = e.clientX;
-      this.y = e.clientY;
-      this.layout();
+      this.layout(e.clientX, e.clientY);
       this.$emit('update:show', true);
       e.preventDefault();
     },
 
 
     // 布局
-    layout: function layout() {
+    layout: function layout(x, y) {
       this.style = {
-        left: this.x + 'px',
-        top: this.y + 'px'
+        left: x + 'px',
+        top: y + 'px'
       };
     }
   }
@@ -336,9 +334,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       value: (_vm.show),
       expression: "show"
     }],
-    staticStyle: {
-      "display": "block"
-    },
     style: (_vm.style),
     on: {
       "mousedown": function($event) {

@@ -1,5 +1,5 @@
 <template>
-  <div :style="style" style="display: block;" v-show="show"
+  <div :style="style" v-show="show"
     @mousedown.stop
     @contextmenu.prevent
   >
@@ -14,10 +14,9 @@ export default {
     return {
       triggerShowFn: () => {},
       triggerHideFn: () => {},
-      x: null,
-      y: null,
       style: {},
-      binded: false
+      binded: false,
+      bindedTarget: {}
     }
   },
   props: {
@@ -25,6 +24,7 @@ export default {
     show: Boolean
   },
   mounted () {
+    this.bindedTarget = this.target instanceof HTMLBodyElement ?  this.target : this.$parent.$el;
     this.bindEvents()
   },
   watch: {
@@ -36,6 +36,7 @@ export default {
       }
     },
     target (target) {
+      this.bindedTarget = this.target instanceof HTMLBodyElement ?  this.target : this.$parent.$el;
       this.bindEvents()
     }
   },
@@ -43,17 +44,16 @@ export default {
     // 初始化事件
     bindEvents () {
       this.$nextTick(() => {
-        if (!this.target || this.binded) return 
+        if (this.binded) return 
         this.triggerShowFn = this.contextMenuHandler.bind(this)
-        this.target.addEventListener('contextmenu', this.triggerShowFn)
+        this.bindedTarget.addEventListener('contextmenu', this.triggerShowFn)
         this.binded = true
       })
     },
 
     // 取消绑定事件
     unbindEvents () {
-      if (!this.target) return
-      this.target.removeEventListener('contextmenu', this.triggerShowFn)
+      this.bindedTarget.removeEventListener('contextmenu', this.triggerShowFn)
     },
 
     // 绑定隐藏菜单事件
@@ -76,18 +76,16 @@ export default {
 
     // 右键事件事件处理
     contextMenuHandler (e) {
-      this.x = e.clientX
-      this.y = e.clientY
-      this.layout()
+      this.layout(e.clientX, e.clientY)
       this.$emit('update:show', true)
       e.preventDefault()
     },
 
     // 布局
-    layout () {
+    layout (x, y) {
       this.style = {
-        left: this.x + 'px',
-        top: this.y + 'px'
+        left: x + 'px',
+        top: y + 'px'
       }
     }
   }
