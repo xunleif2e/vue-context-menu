@@ -36,6 +36,7 @@ export default {
       }
     },
     target (target) {
+      this.binded = false
       this.bindEvents()
     }
   },
